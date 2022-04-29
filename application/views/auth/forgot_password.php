@@ -1,13 +1,13 @@
 <div class="login-box pt-5">
 	<!-- /.login-logo -->
-	<div class="login-logo">
+	<!-- <div class="login-logo">
 		<a href="<?=base_url('login')?>">
 		<img src="<?= base_url('assets/dist/img/b.png') ?>" width="30%" alt="" srcset="">
 		<b>CBT</b>APP</a>
-	</div>
+	</div> -->
 
-	<div class="login-box-body">
-		<h3 class="text-center mt-0 mb-4">
+	<div class="login-box-body" >
+		<h3 class="text-center mt-0 mb-4" style="color: #dd4b39;">
 			<?php echo lang('forgot_password_heading');?>
 		</h3>
 		<p class="login-box-msg">
@@ -27,7 +27,7 @@
 				<?php echo form_input($identity);?>
 			</p>
 
-			<p><?php echo form_submit('submit', 'Forgot Password', ['class'=>'btn btn-primary btn-flat btn-block']);?></p>
+			<p><?php echo form_submit('submit', 'Lupa Password', ['class'=>'btn btn-danger btn-flat btn-block']);?></p>
 
 		<?php echo form_close();?>
 
