@@ -25,8 +25,11 @@ setlocale(LC_ALL, 'IND');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = "http://".$_SERVER['HTTP_HOST'];
-$config['base_url'] .= preg_replace('@/+$@','',dirname($_SERVER['SCRIPT_NAME'])).'/';
+
+$root  =(isset($_SERVER['HTTPS']) ? "https://" : "http://").$_SERVER['HTTP_HOST'];
+$root .= preg_replace('@/+$@','',dirname($_SERVER['SCRIPT_NAME'])).'/';
+$config['base_url']  = "$root";
+
 /*
 |--------------------------------------------------------------------------
 | Index File
