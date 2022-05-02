@@ -123,7 +123,7 @@
 					<i class="fa fa-users"></i> <span>Manajemen Pengguna</span>
 				</a>
 			</li>
-			<li class="<?=$page==='settings'?"active":""?>">
+			<li class="<?=$page==='settings'?"active":""?> hide">
 				<a href="<?=base_url('settings')?>" rel="noopener noreferrer">
 					<i class="fa fa-cog"></i> <span>Pengaturan</span>
 				</a>
