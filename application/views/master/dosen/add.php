@@ -26,7 +26,7 @@
                     <input type="text" class="form-control" name="email" placeholder="Email Penguji">
                     <small class="help-block"></small>
                 </div>
-                <div class="form-group">
+                <div class="form-group hide">
                     <label for="matkul">Mata Kuliah</label>
                     <select name="matkul" id="matkul" class="form-control select2" style="width: 100%!important">
                         <option value="" disabled >Pilih Mata Kuliah</option>
