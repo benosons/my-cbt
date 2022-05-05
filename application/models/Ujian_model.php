@@ -17,14 +17,11 @@ class Ujian_model extends CI_Model {
     
     public function getListUjian($id, $kelas)
     {
-        $this->datatables->select("a.id_ujian, e.nama_dosen, d.nama_kelas, a.nama_ujian, b.nama_matkul, a.jumlah_soal, CONCAT(a.tgl_mulai, ' <br/> (', a.waktu, ' Menit)') as waktu,  (SELECT COUNT(id) FROM h_ujian h WHERE h.mahasiswa_id = {$id} AND h.ujian_id = a.id_ujian) AS ada, e.kategori_id, f.nama_kategori");
+        $this->datatables->select("a.id_ujian, e.nama_dosen, a.nama_ujian, a.jumlah_soal, CONCAT(a.tgl_mulai, ' <br/> (', a.waktu, ' Menit)') as waktu,  (SELECT COUNT(id) FROM h_ujian h WHERE h.mahasiswa_id = {$id} AND h.ujian_id = a.id_ujian) AS ada, e.kategori_id, f.nama_kategori");
         $this->datatables->from('m_ujian a');
-        $this->datatables->join('matkul b', 'a.matkul_id = b.id_matkul');
-        $this->datatables->join('kelas_dosen c', "a.dosen_id = c.dosen_id");
-        $this->datatables->join('kelas d', 'c.kelas_id = d.id_kelas');
-        $this->datatables->join('dosen e', 'e.id_dosen = c.dosen_id');
-        $this->datatables->join('kategori f', 'e.kategori_id = f.id_kategori');
-        $this->datatables->where('d.id_kelas', $kelas);
+        $this->datatables->join('dosen e', 'e.id_dosen = a.dosen_id');
+        $this->datatables->join('kategori f', 'a.kategori_id = f.id_kategori');
+        $this->datatables->where('a.kategori_id', $kelas);
         return $this->datatables->generate();
     }
 
@@ -106,10 +103,9 @@ class Ujian_model extends CI_Model {
     public function getHasilUjian($nip = null)
     {
         $this->datatables->select('b.id_ujian, b.nama_ujian, b.jumlah_soal, CONCAT(b.waktu, " Menit") as waktu, b.tgl_mulai, e.id_kategori, e.nama_kategori');
-        $this->datatables->select('c.nama_matkul, d.nama_dosen');
+        $this->datatables->select('d.nama_dosen');
         $this->datatables->from('h_ujian a');
         $this->datatables->join('m_ujian b', 'a.ujian_id = b.id_ujian');
-        $this->datatables->join('matkul c', 'b.matkul_id = c.id_matkul');
         $this->datatables->join('dosen d', 'b.dosen_id = d.id_dosen');
         $this->datatables->join('kategori e', 'd.kategori_id = e.id_kategori');
         $this->datatables->group_by('b.id_ujian');
