@@ -81,7 +81,7 @@ class HasilUjian extends CI_Controller {
 			'hasil' => $hasil,
 			'mhs'	=> $mhs
 		];
-		
+
 		$this->load->view('ujian/cetak', $data);
 	}
 
@@ -98,7 +98,7 @@ class HasilUjian extends CI_Controller {
 			'nilai'	=> $nilai,
 			'hasil'	=> $hasil
 		];
-
+		
 		$this->load->view('ujian/cetak_detail', $data);
 	}
 	

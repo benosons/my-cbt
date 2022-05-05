@@ -69,7 +69,7 @@ Dolore distinctio, at consequuntur magnam cupiditate voluptate hic ratione ea il
 <h2>Data Peserta</h2>
 <table id="data-peserta">
     <tr>
-        <th>NIM</th>
+        <th>Telepon</th>
         <td>{$mhs->nim}</td>
     </tr>
     <tr>
@@ -77,19 +77,15 @@ Dolore distinctio, at consequuntur magnam cupiditate voluptate hic ratione ea il
         <td>{$mhs->nama}</td>
     </tr>
     <tr>
-        <th>Kelas</th>
-        <td>{$mhs->nama_kelas}</td>
-    </tr>
-    <tr>
-        <th>Jurusan</th>
-        <td>{$mhs->nama_jurusan}</td>
+        <th>Kategori</th>
+        <td>{$mhs->nama_kategori}</td>
     </tr>
 </table>
 <h2>Data Ujian</h2>
 <table id="data-hasil">
     <tr>
-        <th>Mata Kuliah</th>
-        <td>{$ujian->nama_matkul}</td>
+        <th>Kategori</th>
+        <td>{$ujian->nama_kategori}</td>
     </tr>
     <tr>
         <th>Nama Ujian</th>

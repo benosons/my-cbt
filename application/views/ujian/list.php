@@ -52,7 +52,7 @@
                         <th>No.</th>
                         <th>Nama Ujian</th>
                         <th>Kategori</th>
-						<th>Dosen</th>
+						<th>Penguji</th>
                         <th>Jumlah Soal</th>
                         <th>Waktu</th>
                         <th class="text-center">Aksi</th>
@@ -63,7 +63,7 @@
                         <th>No.</th>
                         <th>Nama Ujian</th>
                         <th>Kategori</th>
-						<th>Dosen</th>
+						<th>Penguji</th>
                         <th>Jumlah Soal</th>
                         <th>Waktu</th>
                         <th class="text-center">Aksi</th>
