@@ -13,16 +13,23 @@
 	<div id="infoMessage" class="text-center"><?php echo $message;?></div>
 
 	<?= form_open("auth/cek_login", array('id'=>'login'));?>
-		<div class="form-group has-feedback">
-			<?= form_input($identity);?>
-			<span class="fa fa-envelope form-control-feedback"></span>
-			<span class="help-block"></span>
-		</div>
-		<div class="form-group has-feedback">
-			<?= form_input($password);?>
-			<span class="glyphicon glyphicon-lock form-control-feedback"></span>
-			<span class="help-block"></span>
-		</div>
+		<div class="input-group mb-3">
+		<?= form_input($identity);?>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fa fa-envelope" style="font-size: 14px;"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+		<?= form_input($password);?>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span id="show-password" class="glyphicon glyphicon-eye-open" style="font-size: 14px;"></span>
+            </div>
+          </div>
+        </div>
+		
 		<div class="row">
 			<div class="col-xs-8">
 			<div class="checkbox icheck">

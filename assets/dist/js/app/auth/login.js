@@ -43,4 +43,19 @@ $(document).ready(function(){
             }
         });
     });
+
+
+    $('#show-password').on('click', function(e){
+        e.preventDefault();
+        if($('#password').attr("type") == "text"){
+            $('#password').attr('type', 'password');
+            $('#show-password').removeClass( "glyphicon-eye-close" );
+            $('#show-password').addClass( "glyphicon-eye-open" );
+
+        }else if($('#password').attr("type") == "password"){
+            $('#password').attr('type', 'text');
+            $('#show-password').removeClass( "glyphicon-eye-open" );
+            $('#show-password').addClass( "glyphicon-eye-close" );
+        }
+    })
 });

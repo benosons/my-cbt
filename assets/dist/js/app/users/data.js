@@ -65,7 +65,9 @@ $(document).ready(function() {
                         case 'peserta':
                             var badge = '';
                             break;
-                    
+                        case 'penguji':
+                            var badge = 'bg-yellow';
+                            break;
                         default:
                             var badge = 'bg-red';
                             break;
