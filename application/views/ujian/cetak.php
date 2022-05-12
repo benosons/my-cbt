@@ -103,11 +103,40 @@ Dolore distinctio, at consequuntur magnam cupiditate voluptate hic ratione ea il
         <td>{$hasil->jml_benar}</td>
     </tr>
     <tr>
+        <th>Jawab Salah</th>
+        <td>{$hasil->jml_salah}</td>
+    </tr>
+    <tr>
         <th>Nilai</th>
         <td>{$hasil->nilai}</td>
     </tr>
 </table>
 EOD;
+
+if($soalsalah){
+$html .= <<<EOD
+<h2>Soal Jawaban Salah</h2>
+<table>
+        <tr>
+            <th><b>Soal</b></th>
+            <th><b>Jawaban</b></th>
+        </tr>
+
+EOD;
+    foreach ($soalsalah as $value) {
+        $html .= <<<EOD
+        <tr>
+            <td>{$value['soal']}</td>
+            <td>{$value['jawaban']}</td>
+        </tr>
+        EOD;
+    }
+
+    $html .= <<<EOD
+
+</table>
+EOD;
+}
 // output the HTML content
 $pdf->writeHTML($html, true, 0, true, 0);
 // reset pointer to the last page

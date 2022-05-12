@@ -313,7 +313,9 @@ class Ujian extends CI_Controller {
 				'mahasiswa_id'	=> $mhs->id_mahasiswa,
 				'list_soal'		=> $list_id_soal,
 				'list_jawaban' 	=> $list_jw_soal,
+				'list_salah' 	=> '',
 				'jml_benar'		=> 0,
+				'jml_salah'		=> 0,
 				'nilai'			=> 0,
 				'nilai_bobot'	=> 0,
 				'tgl_mulai'		=> $time_mulai,
@@ -428,7 +430,7 @@ class Ujian extends CI_Controller {
 		
 		// Get Jawaban
 		$list_jawaban = $this->ujian->getJawaban($id_tes);
-
+		
 		// Pecah Jawaban
 		$pc_jawaban = explode(",", $list_jawaban);
 		
@@ -438,6 +440,8 @@ class Ujian extends CI_Controller {
 		$nilai_bobot 	= 0;
 		$total_bobot	= 0;
 		$jumlah_soal	= sizeof($pc_jawaban);
+		$soal_benar		= '';
+		$soal_salah		= '';
 
 		foreach ($pc_jawaban as $jwb) {
 			$pc_dt 		= explode(":", $jwb);
@@ -448,17 +452,28 @@ class Ujian extends CI_Controller {
 			$cek_jwb 	= $this->soal->getSoalById($id_soal);
 			$total_bobot = $total_bobot + $cek_jwb->bobot;
 
+			
 			$jawaban == $cek_jwb->jawaban ? $jumlah_benar++ : $jumlah_salah++;
+			if($jawaban == $cek_jwb->jawaban){
+				$soal_benar .= $id_soal.':'.$jawaban.',';
+			}else{
+				$soal_salah .= $id_soal.':'.$jawaban.',';
+			}
 		}
-
+		$soal_benar	= substr($soal_benar, 0, -1);
+		$soal_salah	= substr($soal_salah, 0, -1);
+		
 		$nilai = ($jumlah_benar / $jumlah_soal)  * 100;
 		$nilai_bobot = ($total_bobot / $jumlah_soal)  * 100;
-
+		
 		$d_update = [
 			'jml_benar'		=> $jumlah_benar,
+			'jml_salah'		=> $jumlah_salah,
 			'nilai'			=> number_format(floor($nilai), 0),
 			'nilai_bobot'	=> number_format(floor($nilai_bobot), 0),
-			'status'		=> 'N'
+			'status'		=> 'N',
+			'list_benar' 	=> $soal_benar,
+			'list_salah' 	=> $soal_salah
 		];
 
 		$this->master->update('h_ujian', $d_update, 'id', $id_tes);

@@ -12,6 +12,7 @@ class HasilUjian extends CI_Controller {
 		$this->load->library(['datatables']);// Load Library Ignited-Datatables
 		$this->load->model('Master_model', 'master');
 		$this->load->model('Ujian_model', 'ujian');
+		$this->load->model('Soal_model', 'soal');
 		
 		$this->user = $this->ion_auth->user()->row();
 	}
@@ -75,11 +76,45 @@ class HasilUjian extends CI_Controller {
 		$mhs 	= $this->ujian->getIdMahasiswa($this->user->username);
 		$hasil 	= $this->ujian->HslUjian($id, $mhs->id_mahasiswa)->row();
 		$ujian 	= $this->ujian->getUjianById($id);
+		$tampil_soal = []; 
+		if($hasil->list_salah){
+			$salah 		 = explode(",", $hasil->list_salah);
+			foreach ($salah as $slh) {
+				$soal 		= explode(":", $slh);
+				$idsoal 	= $soal[0];
+				$jawab 		= $soal[1];
+				$cek_soal 	= $this->soal->getSoalById($idsoal);
+				switch ($jawab) {
+					case 'A':
+						$isijawaban = $jawab.':'.$cek_soal->opsi_a;
+						break;
+					case 'B':
+						$isijawaban = $jawab.':'.$cek_soal->opsi_b;
+						break;
+					case 'C':
+						$isijawaban = $jawab.':'.$cek_soal->opsi_c;
+						break;
+					case 'D':
+						$isijawaban = $jawab.':'.$cek_soal->opsi_d;
+						break;
+					case 'E':
+						$isijawaban = $jawab.':'.$cek_soal->opsi_e;
+						break;
+				}
+
+				$push_soal = [
+					'soal' 		=> $cek_soal->soal,
+					'jawaban'	=> $isijawaban
+				];
+				array_push($tampil_soal, $push_soal);
+			}
+		}
 		
 		$data = [
 			'ujian' => $ujian,
 			'hasil' => $hasil,
-			'mhs'	=> $mhs
+			'mhs'	=> $mhs,
+			'soalsalah'	=> $tampil_soal
 		];
 
 		$this->load->view('ujian/cetak', $data);
